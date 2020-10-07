@@ -9,9 +9,5 @@ int main() {
         printf("%d",i);
     }
     printf("\nLoop ending...\n");
-//    Expected output will be similar to this:
-//    the begin of loop
-//    6378049152
-//    the end of loop
     return 0;
 }

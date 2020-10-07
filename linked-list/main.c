@@ -8,24 +8,25 @@
 
 //Segmentation fault (core dumped)
 
-struct Node {
+typedef struct Node {
    int data;
-   int key;
    struct Node *next;
-};
+} node_t;
 
-struct Queue {
-   struct Node *head;
-   struct Node *tail;
-};
+typedef struct Queue {
+   node_t * head;
+   node_t * tail;
+} queue_t;
 
-struct Node* create(int data) {
-   struct Node *node;
+node_t * create(int data) {
+   node_t * node = NULL;
+   node = (node_t *)malloc(sizeof(node_t));
    node->data = data;
+
    return node;
 };
 
-struct Queue* append_node(struct Queue *queue, struct Node *node) {
+queue_t * append_node(queue_t * queue, node_t * node) {
    #pragma omp critical
    {
       if (queue->head == NULL){
@@ -39,12 +40,8 @@ struct Queue* append_node(struct Queue *queue, struct Node *node) {
    return queue;
 };
 
-struct Queue* add(struct Queue *queue, int data) {
-   return append_node(queue, create(data));
-}
-
-struct Node* remove_node(struct Queue *queue) {
-   struct Node *node;
+ node_t * remove_node(queue_t * queue) {
+   node_t * node;
    #pragma omp critical
    {
       node = queue->head;
@@ -58,46 +55,42 @@ void processNode();
 
 int main() {
    srand(12);
-   struct Queue *queue;
+   queue_t queue = {.head = NULL,.tail = NULL};
+   queue_t * queuePointer = &queue;
 
    #pragma omp parallel for
-   for (int i = 0; i < 10; ++i) {
-      add(queue, i);
+   for (int i = 0; i < 100; ++i) {
+      append_node(queuePointer, create(i));
    } 
 
    size_t totalProcessedCounter = 0;
     double timer_started = omp_get_wtime();
     omp_set_num_threads(5);
+
     #pragma omp parallel
     {
-      struct Node *n;
+      node_t * n;
       size_t processedCounter = 0;
       double started = omp_get_wtime();
       
-      while ((remove_node(queue)) != NULL) {
+      while ((remove_node(queuePointer)) != NULL) {
          processNode();
          processedCounter++;
       }
 
         double elapsed = omp_get_wtime() - started;
-        printf("Thread id: %d,  processed: %ld nodes, took: %f seconds \n",
-               omp_get_thread_num(), processedCounter, elapsed);
+        printf("Thread id: %d,  processed: %ld nodes, took: %f seconds \n", omp_get_thread_num(), processedCounter, elapsed);
         #pragma omp atomic
         totalProcessedCounter += processedCounter;
     }
 
     double elapsed = omp_get_wtime() - timer_started;
-    printf("End. Processed %ld nodes. Took %f in total", totalProcessedCounter, elapsed);
-//    Thread id: 4,  processed: 100 nodes, took: 5.114557 seconds
-//    Thread id: 0,  processed: 111 nodes, took: 5.118820 seconds
-//    Thread id: 2,  processed: 102 nodes, took: 5.125992 seconds
-//    Thread id: 3,  processed: 95 nodes, took: 5.158186 seconds
-//    Thread id: 1,  processed: 92 nodes, took: 5.173112 seconds
-//    end. processed 500 nodes. took 5.17337 in total
+    printf("End. Processed %ld nodes. Took %f in total\n", totalProcessedCounter, elapsed);
+
    return 0;
 }
 
 void processNode() {
-    int r = rand() % 9 + 1; // between 1 and 9
-    usleep(r * 10000); // sleeps 0.001 or 0.090 second
+    int r = rand() % 9 + 1;
+    usleep(r * 10000);
 }

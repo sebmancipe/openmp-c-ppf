@@ -9,8 +9,7 @@ void integral_reduction();
 void integral_better_reduction();
 
 int main() {
-    integral_roundrobin();
-//    integral_reduction();
+    integral_better_reduction();
 }
 
 

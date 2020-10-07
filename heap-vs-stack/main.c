@@ -15,13 +15,5 @@ int main() {
         printf("heap sum is %d\n", heap_sum);
     }
     printf("final heap sum is %d\n", heap_sum);
-//    output:
-//    stack sum is 1
-//    stack sum is 1
-//    stack sum is 1
-//    heap sum is 3
-//    heap sum is 3
-//    heap sum is 3
-//    final heap sum is 3
     return 0;
 }
