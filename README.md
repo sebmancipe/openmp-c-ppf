@@ -11,14 +11,14 @@ Este repositorio contiene una serie de ejercicios que implementan la librería `
 ## Ejercicios
 | Carpeta      | Descripción |
 | ----------- | ----------- |
-| scheduling      |        |
+| scheduling      |   Tipos de distribución de cargas     |
 | parallel-loop  | Implementación simple de un ciclo for paralelizado        |
 | matrix  |         |
-| linked-list  |         |
-| integral  |         |
+| linked-list  |  Paralelización del procesamiento de una estructura de datos      |
+| integral  |  Diferentes enfoques para obtener el valor de PI      |
 | hello-omp  | Implementación de una región paralela    |
-| head-vs-stack  |     |
-| data-sharing  |     |
+| head-vs-stack  |  Diferencias entre la definción de variables dentro y fuera de la sección paralela   |
+| data-sharing  | Variables compartidas y privadas inicializadas y no inicializadas     |
 | average-reduction  |     |
 | als-movie-recommender  |     |
 ---

@@ -6,8 +6,6 @@
 #include <omp.h>
 #include <unistd.h>
 
-//Segmentation fault (core dumped)
-
 typedef struct Node {
    int data;
    struct Node *next;
