@@ -1,0 +1,5 @@
+# average-reduction
+
+## Descripción
+---
+## Output
