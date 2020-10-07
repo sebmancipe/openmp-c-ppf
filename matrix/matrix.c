@@ -24,7 +24,7 @@ double set(struct Matrix *const matrixInstance, int row, int col, double val)
     matrixInstance->data[row * matrixInstance->cols + col] = val;
 }
 
-struct Matrix operator+(const Matrix &m2)
+struct Matrix operator(const Matrix &m2)
 {
     return sum(m2);
 }
