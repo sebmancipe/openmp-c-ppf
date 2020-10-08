@@ -19,7 +19,7 @@ Este repositorio contiene una serie de ejercicios que implementan la librería `
 | hello-omp  | Implementación de una región paralela    |
 | head-vs-stack  |  Diferencias entre la definción de variables dentro y fuera de la sección paralela   |
 | data-sharing  | Variables compartidas y privadas inicializadas y no inicializadas     |
-| average-reduction  |     |
+| average-reduction  | Uso de la cláusula reduction y comparación con un algoritmo que no la implementa   |
 | als-movie-recommender  |     |
 ---
 ## Ejecución
