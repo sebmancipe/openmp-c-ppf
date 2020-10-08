@@ -1,3 +1,13 @@
+/*
+* Author of C++ script: Mustafa Atik - muatik@gmail.com 
+* Authors of C script: 
+*   Anderson Ballesteros - anderson.ballesteros@correo.usa.edu.co 
+*   Sebastian Mancipe - sebastian.mancipe@correo.usa.edu.co
+* Sergio Arboleda University
+* Bogota, Colombia
+* 2020
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 
