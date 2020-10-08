@@ -29,9 +29,9 @@ gcc -fopenmp main.c -o main
 ./main
 ```
 ## Contribuidores
-[@sebmancipe](https://github.com/sebmancipe) - _Universidad Sergio Arboleda, Bog. COL_
+[@sebmancipe](https://github.com/sebmancipe) - _Universidad Sergio Arboleda, Bog. COL_ - <sebastian.mancipe@correo.usa.edu.co>
 
-[@anderballes98](https://github.com/AnderBalles98) - _Universidad Sergio Arboleda, Bog. COL_
+[@anderballes98](https://github.com/AnderBalles98) - _Universidad Sergio Arboleda, Bog. COL_ - <anderson.ballesteros@correo.usa.edu.co>
 
 ## Disclaimer
-El código en C de cada uno de los ejercicios fue obtenido gracias al usuario [@muatick](https://github.com/muatik), en su repositorio [openmp-examples](https://github.com/muatik/openmp-examples).
+El código en C++ de cada uno de los ejercicios fue obtenido gracias al usuario [@muatick](https://github.com/muatik), en su repositorio [openmp-examples](https://github.com/muatik/openmp-examples).
