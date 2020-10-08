@@ -13,14 +13,14 @@ Este repositorio contiene una serie de ejercicios que implementan la librería `
 | ----------- | ----------- |
 | scheduling      |   Tipos de distribución de cargas     |
 | parallel-loop  | Implementación simple de un ciclo for paralelizado        |
-| matrix  |         |
+| matrix  |   No se encuentra implementado debido a problemas de crestomatía (pasar de un lenguaje a otro)      |
 | linked-list  |  Paralelización del procesamiento de una estructura de datos      |
 | integral  |  Diferentes enfoques para obtener el valor de PI      |
 | hello-omp  | Implementación de una región paralela    |
 | head-vs-stack  |  Diferencias entre la definción de variables dentro y fuera de la sección paralela   |
 | data-sharing  | Variables compartidas y privadas inicializadas y no inicializadas     |
 | average-reduction  | Uso de la cláusula reduction y comparación con un algoritmo que no la implementa   |
-| als-movie-recommender  |     |
+| als-movie-recommender  |  No se encuentra implementado debido a problemas de crestomatía (pasar de un lenguaje a otro)   |
 ---
 ## Ejecución
 Para poder ejecutar los scripts deben compilarse y ejecutarse con `gcc` junto con la bandera `-fopenmp` dentro de la carpeta del ejercicio. 
