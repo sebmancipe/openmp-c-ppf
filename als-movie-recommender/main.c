@@ -32,6 +32,8 @@ int main(int argc, char ** argv) {
     return 0;
 }
 
+// Lee los datos separados por comas que se encuentran en un archivo y
+// los transforma en una matriz 
 void load_csv (char *path, int  **ratings) {
 
     int ** toReturn;
@@ -59,6 +61,7 @@ void load_csv (char *path, int  **ratings) {
 
 }
 
+// Inicializa los datos del algoritmo de mínimos cuadrados alternos
 void factorize() {
     int **ratings;
     load_csv("data.txt", &ratings);
@@ -73,11 +76,12 @@ void factorize() {
 
 }
 
+// Obtiene un número random entre 0-9
 int getRandomNumber() {
 	return rand() % 1000 / 100;
 }
 
-
+// Inicializa una matriz con valores random
 void initRandomMatrix(int **matrix, int rows, int cols) {
     int **m = (int **)calloc(rows, sizeof(int *));
     for (int i = 0; i < rows; i++) {
@@ -89,27 +93,13 @@ void initRandomMatrix(int **matrix, int rows, int cols) {
     *matrix = m;
 }
 
+
+// Algoritmo de mínimos cuadrados alternos
 void als(int **ratings, int maxUserId, int maxMovieId, int rank, int threadNumber) {
 
     int **U, **M;
     initRandomMatrix(&U, maxUserId, rank);
     initRandomMatrix(&M, rank, maxMovieId);
-
-    // for (int i = 0; i < maxUserId; i++) {
-    //     for (int j = 0; j < rank; j++)
-    //     {
-    //         printf("U[%d][%d]: %d\n", i, j, U[i][j]);
-    //     }
-        
-    // }
-    
-    // for (int i = 0; i < rank; i++) {
-    //     for (int j = 0; j < maxMovieId; j++)
-    //     {
-    //         printf("M[%d][%d]: %d\n", i, j, M[i][j]);
-    //     }
-        
-    // }
     
 
     int **A = (int **)calloc(maxUserId, sizeof(int *));
@@ -140,7 +130,7 @@ void als(int **ratings, int maxUserId, int maxMovieId, int rank, int threadNumbe
     int errorHistorySize = 0;
     float start = omp_get_wtime();
      for (int iteration = 0; iteration < maxIteration; ++iteration) {
-
+        // Sección paralela utilizando la directiva for schedule(static)
         #pragma omp parallel for num_threads(threadNumber) schedule(static) private(ui, mi, ri, error, tempU)
         for (int i = 0; i < ratingsRows; ++i) {
             int ui = ratings[i][0] - 1; // userId index
@@ -185,6 +175,7 @@ void als(int **ratings, int maxUserId, int maxMovieId, int rank, int threadNumbe
 
 }
 
+// Retorna la suma de los elementos de una matriz
 float sumElements(int **matrix, int rows, int cols) {
     float sum = 0;
     for (int i = 0; i < rows; i++) {
@@ -196,6 +187,7 @@ float sumElements(int **matrix, int rows, int cols) {
     return sum;
 }
 
+// Eleva al cuadrado cada elemento de una matriz
 void square(int **matrix, int rows, int cols, int **result) {
     int **r = (int **)calloc(rows, sizeof(int *));
     for (int i = 0; i < rows; i++) {
@@ -207,6 +199,7 @@ void square(int **matrix, int rows, int cols, int **result) {
     *result = r;
 }
 
+// Resta entre matrices
 void subsctracMatrixes(int **m1, int **m2, int rows, int cols, int **result) {
     int **r = (int **)calloc(rows, sizeof(int *));
     for (int i = 0; i < rows; i++) {
@@ -218,6 +211,7 @@ void subsctracMatrixes(int **m1, int **m2, int rows, int cols, int **result) {
     *result = r;
 }
 
+// Obtiene una columna de un matriz la columna se almacena en forma de vector
 void getCol(int **matrix, int rows, int nCol, int **result) {
     int *r = (int *)calloc(rows, sizeof(int *));
     for (int i = 0; i < rows; i++) {
@@ -228,6 +222,7 @@ void getCol(int **matrix, int rows, int nCol, int **result) {
     *result = r;
 }
 
+// Modifica una columna de una matriz, recibiendo la nueva columna en forma de vector
 void setCol(int **matrix, int rows, int nCol, int *newCol, int **result) {
     for (int i = 0; i < rows; i++) {
         // printf("%d\n", matrix[i][nCol]);
@@ -238,6 +233,7 @@ void setCol(int **matrix, int rows, int nCol, int *newCol, int **result) {
     
 }
 
+// Multiplicación entre matrices
 void multiplyMatrixes(int **m1, int **m2, int colsRows, int rowsM1, int colsM2, int **result) {
     int **r = (int **)calloc(rowsM1, sizeof(int *));
     for (int i = 0; i < rowsM1; i++) {
@@ -254,6 +250,7 @@ void multiplyMatrixes(int **m1, int **m2, int colsRows, int rowsM1, int colsM2, 
 }
 
 
+// Halla la transpuesta de una matriz
 void transpose(int **matrix, int rows, int cols, int **transpose) {
     int **mt = (int **)calloc(cols, sizeof(int *));
     for (int i = 0; i < cols; i++) {
@@ -268,6 +265,7 @@ void transpose(int **matrix, int rows, int cols, int **transpose) {
     
 }
 
+// Realiza la suma de 2 vectores
 void sumVectors(int *v1, int *v2,  int size, int **result) {
     int *r = (int *)calloc(size, sizeof(int *));
     for (int i = 0; i < size; i++) {
@@ -276,6 +274,7 @@ void sumVectors(int *v1, int *v2,  int size, int **result) {
     *result = r;
 }
 
+// Realiza la multiplicación entre un escalar y un vector
 void escalarByVector(float escalar, int *vector, int size, int **result) {
     int *r = (int *)calloc(size, sizeof(int *));
     for (int i = 0; i < size; i++) {
@@ -285,6 +284,8 @@ void escalarByVector(float escalar, int *vector, int size, int **result) {
 
 }
 
+// Multiplicación entre una fila y una columna de diferentes matrices
+// El resultado es un escalar
 int multiplyRowByCol(int *row, int *col, int size) {
     int toReturn = 0;
     for (int i = 0; i < size; i++) {

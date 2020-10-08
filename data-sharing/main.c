@@ -10,18 +10,22 @@ int main() {
     return 0;
 }
 
+// Realiza la comparación entre las directicas 'private' y 'firstPrivate'
 void compare_cases() {
     int a=1, b=2, c=3, t=4;
     omp_set_num_threads(3);
+
+    // Inicio de zona paralela donde 'a' no está inicilizada
+    // y 'b' debe estart inicializada 
     #pragma omp parallel private(a), firstprivate(b)
     {
-        // a will be private and, but not be initialized
-        // b will be private and initialized
-        // c will be shared;
-        // t will be local; that is it is private.
+        // a Es privada, pero no ha sido inicializada
+        // b Es privada, pero ya fue inicializada
+        // c Es compartida
+        // t Será local ó privada, debido a que cambiamos su valor.
         int t = 5;
 
-        static int s = 8; // will be shared.
+        static int s = 8; // Las variables 'static' son públicas
         if (omp_get_thread_num() == 0)
             s = 2;
 

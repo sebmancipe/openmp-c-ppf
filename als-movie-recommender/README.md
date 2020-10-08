@@ -1,5 +1,5 @@
 # als-movie-recommender
 
 ## Descripción
----
-## Output
+Este algoritmo es un sistema de recomendación que utiliza el método de mínimos cuadrados alternos. Haciendo uso de de la directiva `for schedule` con parámetro `static` de openMp.
+## Output1

@@ -1,12 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// Creación de la estructura
 struct Matrix
 {
+    // atributos, valores ó datos que hacen parte de esta estructura
     double *data;
     int rows, cols;
 };
 
+// Inicializa la estructura recibida por parmámetro
 void init(struct Matrix *const matrixInstance, int rows, int cols)
 {
     matrixInstance->rows = rows;
@@ -14,21 +17,26 @@ void init(struct Matrix *const matrixInstance, int rows, int cols)
     matrixInstance->data = (double *) malloc(rows * cols);
 }
 
+// Retorna el atributo 'data' de la estructura recibida por parámetro
 double get(struct Matrix *const matrixInstance, int row, int col)
 {
     return matrixInstance->data[row * matrixInstance->cols + col];
 }
 
+// Modifica y retorna la nueva 'data' de la estructura recibida por parámetro
 double set(struct Matrix *const matrixInstance, int row, int col, double val)
 {
     matrixInstance->data[row * matrixInstance->cols + col] = val;
 }
+
 
 struct Matrix operator(const Matrix &m2)
 {
     return sum(m2);
 }
 
+// Se crea el método 'sum' internos para cada matriz con el fin de sumar esta misma con otra recibida por parámetro
+// Retorna el resultado de la suma 
 Matrix &sum(Matrix matrix)
 {
     Matrix *s = new Matrix(rows, cols);
@@ -39,6 +47,8 @@ Matrix &sum(Matrix matrix)
     return *s;
 }
 
+// Se crea el método 'substrac' internos para cada matriz con el fin de restar esta misma con otra recibida por parámetro
+// Retorna el resultado de la resta 
 Matrix &substract(Matrix matrix)
 {
     Matrix *s = new Matrix(rows, cols);
@@ -49,6 +59,8 @@ Matrix &substract(Matrix matrix)
     return *s;
 }
 
+// Se crea el método 'multiply' privado para cada matriz con el fin de multiplicar esta mismo con otra recibida por parámetro
+// Retorna el resultado de la multiplicación 
 Matrix &multiply(Matrix matrix)
 {
     if (!(shape()[0] == matrix.shape()[1] && shape()[1] == matrix.shape()[0]))
@@ -62,6 +74,8 @@ Matrix &multiply(Matrix matrix)
     return *s;
 }
 
+// Se crea el método 'T' privado para cada matriz con el fin de hallar la transpuesta de la misma
+// Retorna la matriz transpuesta
 Matrix &T()
 {
     Matrix *s = new Matrix(cols, rows);
@@ -75,29 +89,13 @@ Matrix &T()
     return *s;
 }
 
+// Retorna un aputador que almacena la cantidad de fila y columnas
 int *shape()
 {
     int *shape = new int[2];
     shape[0] = rows;
     shape[1] = cols;
     return shape;
-}
-
-__STRING toString()
-{
-    std::stringstream ss;
-    ss << "[" << std::endl
-       << " [";
-    for (int i = 0; i < rows * cols; ++i)
-    {
-        if (i != 0 && i % cols == 0)
-            ss << "]" << std::endl
-               << " [";
-        ss << " " << data[i] << " ";
-    }
-    ss << "]" << std::endl
-       << "]";
-    return ss.str();
 }
 
 int main()
@@ -111,10 +109,6 @@ int main()
     }
 
     m1.set(0, 1, 6);
-    printf('%s', m1.toString());
-    printf('%s', m2.toString());
-    printf('%s', (m1 + m2).toString());
-    printf('%s', m2.T().T().T().toString());
 
     return 0;
 }
