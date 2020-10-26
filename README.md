@@ -9,6 +9,7 @@ Este repositorio contiene una serie de algoritmos que implementan la librería `
 | algorithm_1      |   Algoritmo de multiplicación de matrices por el método de filas por columnas    |
 | algorithm_2  | Algoritmo de multplicación de matrices por el método de filas por filas        |
 | algorithm_3  |  Algoritmo de multiplicación de matrices por el método de 2 filas por 2 filas      |
+
 Existe una explicación más detallada [aquí](docs/README.md).
 
 ---
@@ -35,7 +36,7 @@ $rep = 20;
 ```
 ---
 ## Resultados
-Los resultados son creados en carpetas con el sufijo `.results` en la carpeta raíz donde se ejecuta `launcher.pl`. Cada uno de estas carpetas contendrán archivos de texto con el nombre de la carga y dentro, los resultados separados por hilos.
+Los resultados son creados en carpetas con el sufijo `.results` en la carpeta raíz donde se ejecuta `launcher.pl`. Cada una de estas carpetas contendrán archivos de texto con el nombre de la carga y dentro, los resultados separados por hilos.
 
 ## Contribuidores
 [@sebmancipe](https://github.com/sebmancipe) - _Universidad Sergio Arboleda, Bog. COL_ - <sebastian.mancipe@correo.usa.edu.co>
